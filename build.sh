@@ -2,7 +2,6 @@
 
 set -o xtrace 
 
-
 if ! [ -d "deps/usd" ]; then
     echo "Performing initial build of USD"
     git clone https://github.com/pixaranimationstudios/usd ./deps/usd/
@@ -21,15 +20,20 @@ else
 fi
 
 curr=$(pwd)
-if ! [ -f "./samples.nim" ]; then
-    echo "Generating nim binding file"
-    sed "s/<###>/$curr\//g" samples.nim.template >> samples.nim
-fi
+for f in ./templates/*.nim.template; do
+    gen_name_="${f::-9}"
+    generated_name=$(echo "$gen_name_" | sed -e "s/templates/src/g")
 
-export _INCLUDES="${curr}/deps/usd/build/inst/include/"
-export _LIBDIR="${curr}/deps/usd/build/inst/lib/"
-nim cpp --cincludes:"$_INCLUDES" \
-        --clibdir:"$_LIBDIR" \
-        --passL:-ltf \
-        -o:samples \
-        samples
+    echo "GEN: $generated_name"
+    binary_name=$(echo "$generated_name" | rev | cut -d'.' -f2 | cut -d'/' -f1 | rev)
+    sed "s@<###>@$curr\/deps\/@g" $f > $generated_name
+
+    export _INCLUDES="${curr}/deps/usd/build/inst/include/"
+    export _LIBDIR="${curr}/deps/usd/build/inst/lib/"
+    nim cpp --cincludes:"$_INCLUDES" \
+            --clibdir:"$_LIBDIR" \
+            --passL:-ltf \
+            -o:./bin/$base_name \
+            $generated_name
+
+done
