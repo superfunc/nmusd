@@ -23,7 +23,7 @@ jobs:
           wget -qO - https://nim-lang.org/choosenim/init.sh > setup_nim.sh
           sh setup_nim.sh -y
       - name: Build library
-        run: ./build.sh
+        run: PATH=/home/runner/.nimble/bin:$PATH ./build.sh
   run:
     needs: build
     runs-on: ubuntu-latest
