@@ -2,3 +2,5 @@ nimcache/
 nimblecache/
 htmldocs/
 deps/usd
+src/*.nim
+bin/

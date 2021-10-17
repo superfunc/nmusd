@@ -1,6 +1,7 @@
-{.link: "<###>usd/build/inst/lib/libgf.so".}
+{.link: "<###>usd/build/inst/lib/libusd_ms.so".}
 
 {.emit:"""
+#include <pxr/pxr.h>
 using namespace pxr;
 """.}
 
@@ -14,3 +15,4 @@ type
 proc CreateGfHalf(): GfHalf {. header: gfHalfHeader,
                                importcpp: "GfHalf()" .}
 
+echo "Gf module"

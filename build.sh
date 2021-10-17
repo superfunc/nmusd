@@ -20,20 +20,17 @@ else
 fi
 
 curr=$(pwd)
-for f in ./templates/*.nim.template; do
-    gen_name_="${f::-9}"
-    generated_name=$(echo "$gen_name_" | sed -e "s/templates/src/g")
-
-    echo "GEN: $generated_name"
+for f in ./templates/*.nim; do
+    generated_name=$(echo "$f" | sed -e "s/templates/src/g")
     binary_name=$(echo "$generated_name" | rev | cut -d'.' -f2 | cut -d'/' -f1 | rev)
     sed "s@<###>@$curr\/deps\/@g" $f > $generated_name
-
+    
     export _INCLUDES="${curr}/deps/usd/build/inst/include/"
     export _LIBDIR="${curr}/deps/usd/build/inst/lib/"
     nim cpp --cincludes:"$_INCLUDES" \
             --clibdir:"$_LIBDIR" \
-            --passL:-ltf \
-            -o:./bin/$base_name \
+            --passL:-lusd_ms \
+            -o:./bin/$binary_name \
             $generated_name
 
 done

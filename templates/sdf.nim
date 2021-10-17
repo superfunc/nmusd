@@ -1,6 +1,7 @@
-{.link: "<###>usd/build/inst/lib/libsdf.so".}
+{.link: "<###>usd/build/inst/lib/libusd_ms.so".}
 
 {.emit:"""
+#include <pxr/pxr.h>
 using namespace pxr;
 """.}
 
@@ -14,3 +15,4 @@ type
 proc CreateSdfPath(): SdfPath {. header: sdfPathHeader, 
                                  importcpp: "SdfPath()" .}
 
+echo "Sdf module"

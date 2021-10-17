@@ -1,6 +1,7 @@
-{.link: "<###>usd/build/inst/lib/libtf.so".}
+{.link: "<###>usd/build/inst/lib/libusd_ms.so".}
 
 {.emit:"""
+#include <pxr/pxr.h>
 using namespace pxr;
 """.}
 

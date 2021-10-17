@@ -1,6 +1,7 @@
-{.link: "<###>usd/build/inst/lib/libvt.so".}
+{.link: "<###>usd/build/inst/lib/libusd_ms.so".}
 
 {.emit:"""
+#include <pxr/pxr.h>
 using namespace pxr;
 """.}
 
@@ -11,6 +12,7 @@ type
     VtValue {.header: vtValueHeader,
               importcpp: "VtValue".} = object
 
-proc CreateVtValue(): VtValue {. header: VtValue, 
+proc CreateVtValue(): VtValue {. header: vtValueHeader, 
                                  importcpp: "VtValue()" .}
 
+echo "Vt module"
