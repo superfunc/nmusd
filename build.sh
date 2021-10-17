@@ -9,7 +9,7 @@ if ! [ -d "deps/usd" ]; then
     mkdir -p build/inst
     pushd build
     build_dir=$(pwd)
-    python3 ../build_scripts/build_usd.py --no-python --no-tools \
+    python3 ../build_scripts/build_usd.py --no-python --no-tools --build-monolithic \
                                          --no-docs --no-tutorials --no-imaging \
                                          --no-tests --no-examples --verbose "${build_dir}/inst"
  

@@ -17,4 +17,3 @@ proc CreateTfToken(): TfTokenObj {. header: tf, importcpp: "TfToken()" .}
 echo "attempting to make a tf token"
 var t = CreateTfToken()
 echo "success"
-
