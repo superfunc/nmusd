@@ -30,6 +30,7 @@ for f in ./templates/*.nim; do
     nim cpp --cincludes:"$_INCLUDES" \
             --clibdir:"$_LIBDIR" \
             --passL:-lusd_ms \
+            --passL:-ltbb \
             -o:./bin/$binary_name \
             $generated_name
 
