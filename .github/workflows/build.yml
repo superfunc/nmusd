@@ -24,3 +24,9 @@ jobs:
           sh setup_nim.sh -y
       - name: Build library
         run: ./build.sh
+  run:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run basic checks
+        run: ./run.sh
