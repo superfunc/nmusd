@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  basic:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,9 +24,5 @@ jobs:
           sh setup_nim.sh -y
       - name: Build library
         run: PATH=/home/runner/.nimble/bin:$PATH ./build.sh
-  run:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Run basic checks
         run: ./run.sh
