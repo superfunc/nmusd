@@ -19,6 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install nim dependencies
-        run: wget -qO - https://nim-lang.org/choosenim/init.sh | sh -y
+        run: |
+          wget -qO - https://nim-lang.org/choosenim/init.sh > setup_nim.sh
+          sh setup_nim.sh -y
       - name: Build library
         run: ./build.sh
