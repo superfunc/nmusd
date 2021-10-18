@@ -6,4 +6,26 @@
 
 def "X" {
 
+    def "Xchild" {
+
+    }
+
+}
+
+
+def "Y" {
+
+    def "Ychild" {
+
+    }
+
+}
+
+
+def "Z" {
+
+    def "Zchild" {
+
+    }
+
 }
