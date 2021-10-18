@@ -4,3 +4,4 @@ htmldocs/
 deps/usd
 src/*.nim
 bin/
+temp/

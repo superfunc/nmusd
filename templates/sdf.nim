@@ -2,17 +2,35 @@
 
 {.emit:"""
 #include <pxr/pxr.h>
+#include <pxr/usd/sdf/layer.h>
+#include <string>
+#include <cstdio>
 using namespace pxr;
+
+NIM_EXTERNC
+void priv_dumpLayerContentsC(const char* path) 
+{
+    pxr::SdfLayerRefPtr layer = pxr::SdfLayer::FindOrOpen(path);
+    pxr::SdfLayerRefPtr layer2 = pxr::SdfLayer::FindOrOpen(path);
+    std::string result;
+    layer2->ExportToString(&result); 
+    printf("%s\n", result.c_str());
+}
+
 """.}
 
 const
-    sdfPathHeader = "<###>usd/build/inst/include/pxr/usd/sdf/path.h"
+    sdfLayerHeader = "<###>usd/build/inst/include/pxr/usd/sdf/layer.h"
+
 
 type
-    SdfPath {.header: sdfPathHeader,
-              importcpp: "SdfPath".} = object
+    SdfLayer {.header: sdfLayerHeader,
+               importcpp: "SdfLayer".} = object {. inheritable .}
     
-proc CreateSdfPath(): SdfPath {. header: sdfPathHeader, 
-                                 importcpp: "SdfPath()" .}
 
-echo "Sdf module"
+proc dumpLayer(s: cstring): void {. importcpp: "priv_dumpLayerContentsC(@)",
+                                    nodecl}
+
+when isMainModule:
+    echo "Sdf module"
+    dumpLayer("./data/layer.sdf")
