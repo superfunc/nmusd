@@ -50,13 +50,13 @@ type
     StdVec[T] {. header: "<vector>", importcpp: "std::vector" .} = object
 
     SdfLayer {.header: sdfLayerHeader,
-               importcpp: "SdfLayer".} = object {. inheritable .}
+               importcpp: "pxr::SdfLayer".} = object {. inheritable .}
 
     SdfLayerRefPtr {. header: sdfHandlesHeader,
-                      importcpp: "SdfLayerRefPtr".} = object
+                      importcpp: "pxr::SdfLayerRefPtr".} = object
 
     SdfPrimSpec {. header: sdfPrimHeader,
-                   importcpp: "SdfPrimSpec".} = object
+                   importcpp: "pxr::SdfPrimSpec".} = object
 
     SdfPrimSpecHandle {. header: sdfHandlesHeader,
                          importcpp: "pxr::SdfPrimSpecHandle".} = object

@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-set -o xtrace 
+# set -o xtrace 
 
 if ! [ -d "deps/usd" ]; then
     echo "Performing initial build of USD"
