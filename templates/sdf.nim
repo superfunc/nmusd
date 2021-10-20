@@ -1,4 +1,4 @@
-{.link: "<###>usd/build/inst/lib/libusd_ms.so".}
+{.link: "<###>usd/build/inst/lib/libusd_ms.{!!!}".}
 
 {.emit:"""
 #include <pxr/pxr.h>
@@ -73,13 +73,13 @@ proc dumpLayer(s: cstring): void {. importcpp: "priv_dumpLayerContentsC(@)",
 proc openSdfLayer(s: cstring): SdfLayerRefPtr {. importcpp: "SdfLayer::FindOrOpen(@)",
                                                  header: sdfLayerHeader .} 
 
-proc getRealPath(l: SdfLayerRefPtr): cstring {. importcpp: "#->GetRealPath().c_str()",
+proc getRealPath(l: SdfLayerRefPtr): cstring {. importcpp: "(char*)#->GetRealPath().c_str()",
                                                 header: sdfLayerHeader .} 
 
 proc getPsuedoroot(l: SdfLayerRefPtr): SdfPrimSpecHandle {. importcpp: "#->GetPseudoRoot()",
                                                             header: sdfPrimHeader .} 
 
-proc getName(p: SdfPrimSpecHandle): cstring {. importcpp: "#->GetName().c_str()" 
+proc getName(p: SdfPrimSpecHandle): cstring {. importcpp: "(char*)#->GetName().c_str()" 
                                                header: sdfPrimHeader .}
 
 when isMainModule:

@@ -1,4 +1,4 @@
-{.link: "<###>usd/build/inst/lib/libusd_ms.so".}
+{.link: "<###>usd/build/inst/lib/libusd_ms.{!!!}".}
 
 {.emit:"""
 #include <pxr/pxr.h>

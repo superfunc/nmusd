@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # set -o xtrace 
 
@@ -19,11 +19,18 @@ else
     echo "USD already built, building nim bindings"
 fi
 
+lib_ext="so"
+if [[ $OSTYPE == "darwin"* ]]; then
+    lib_ext="dylib"
+fi
+
+
 curr=$(pwd)
 for f in ./templates/*.nim; do
     generated_name=$(echo "$f" | sed -e "s/templates/src/g")
     binary_name=$(echo "$generated_name" | rev | cut -d'.' -f2 | cut -d'/' -f1 | rev)
-    sed "s@<###>@$curr\/deps\/@g" $f > $generated_name
+    sed "s@<###>@$curr\/deps\/@g" $f > /tmp/nmusd_build_artifact
+    sed "s@{!!!}@$lib_ext@g" /tmp/nmusd_build_artifact > $generated_name
     
     export _INCLUDES="${curr}/deps/usd/build/inst/include/"
     export _LIBDIR="${curr}/deps/usd/build/inst/lib/"

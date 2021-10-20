@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 curr=$(pwd)
 export LD_LIBRARY_PATH="$curr/deps/usd/build/inst/lib/:$LD_LIBRARY_PATH" 

@@ -1,6 +1,6 @@
 include ./sdf
 
-{.link: "<###>usd/build/inst/lib/libusd_ms.so".}
+{.link: "<###>usd/build/inst/lib/libusd_ms.{!!!}".}
 
 {.emit:"""
 #include <pxr/pxr.h>
@@ -51,7 +51,7 @@ proc iter_eq(pr1: UsdPrimRangeIter, pr2: UsdPrimRangeIter): bool {. importcpp: "
 
 proc get(pr: UsdPrimRangeIter): UsdPrim {. importcpp: "*#" .}
 
-proc getName(p: UsdPrim): cstring {. importcpp: "#.GetName().data()" .}
+proc getName(p: UsdPrim): cstring {. importcpp: "(char*)#.GetName().data()" .}
 
 when isMainModule:
     echo "---------------------------------------------------------"
@@ -66,7 +66,7 @@ when isMainModule:
         t_curr = traversal.iter_begin()
         t_end = traversal.iter_end()
 
-    echo "Opened stage rooted at ", $rootLayer.getRealPath() 
+    #echo "Opened stage rooted at ", $rootLayer.getRealPath() 
     while not iter_eq(t_curr, t_end):
         var prim = t_curr.get()
         t_curr = t_curr.iter_next()
