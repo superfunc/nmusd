@@ -36,6 +36,6 @@ jobs:
           wget -qO - https://nim-lang.org/choosenim/init.sh > setup_nim.sh
           sh setup_nim.sh -y
       - name: Build library
-        run: PATH=/home/runner/.nimble/bin:$PATH ./build.sh
+        run: PATH=/User/runner/.nimble/bin:$PATH ./build.sh
       - name: Run basic checks
         run: ./run.sh
