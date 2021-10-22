@@ -5,8 +5,19 @@ include ./sdf
 {.emit:"""
 #include <pxr/pxr.h>
 #include <pxr/usd/usd/common.h>
+#include <pxr/usd/usd/prim.h>
+#include <pxr/usd/usd/attribute.h>
 #include <algorithm>
 using namespace pxr;
+
+// Still figuring out how to handle generics around this so temp
+// TODO: remove this workaround along with the TfToken wrapping
+auto getIntValue = [](pxr::UsdAttribute& attr) {
+    int i; 
+    attr.Get(&i);
+    return i; 
+};
+
 """.}
 
 const
@@ -31,6 +42,9 @@ type
     UsdPrimRangeIter {. header: usdPrimRangeHeader,
                         importcpp: "pxr::UsdPrimRange::iterator" .} = object
 
+    UsdAttribute {. header: usdAttributeHeader,
+                    importcpp: "pxr::UsdAttribute" .} = object
+
 
 proc openUsdStage(path: cstring): UsdStageRefPtr {. importcpp: "UsdStage::Open(@)",
                                                     header: usdStageHeader .}
@@ -53,6 +67,12 @@ proc get(pr: UsdPrimRangeIter): UsdPrim {. importcpp: "*#" .}
 
 proc getName(p: UsdPrim): cstring {. importcpp: "(char*)#.GetName().data()" .}
 
+proc getAttribute(p: UsdPrim, s: cstring): UsdAttribute {. importcpp: "#.GetAttribute(pxr::TfToken(#))" .}
+
+proc hasAttribute(p: UsdPrim, s: cstring): bool {. importcpp: "#.HasAttribute(pxr::TfToken(#))" .}
+
+proc get(a: UsdAttribute): cint {. importcpp: "getIntValue(#)" .}
+
 when isMainModule:
     echo "---------------------------------------------------------"
     echo "Usd module"
@@ -71,7 +91,10 @@ when isMainModule:
         var prim = t_curr.get()
         t_curr = t_curr.iter_next()
         echo "Prim info: ", prim.getName()
-    
+
+        if prim.hasAttribute("foo"):
+            var attr = prim.getAttribute("foo")
+            echo "Attribute value: ", attr.get()
 
     echo ""
     echo "---------------------------------------------------------"
