@@ -23,9 +23,9 @@ def "Y" {
 
 
 def "Z" {
+    float2 foo = (1.4, 4.4)
 
     def "Zchild" {
-
         int foo = 5
     }
 

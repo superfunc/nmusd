@@ -1,4 +1,5 @@
 include ./sdf
+include ./vt
 
 {.link: "<###>usd/build/inst/lib/libusd_ms.{!!!}".}
 
@@ -17,6 +18,13 @@ auto getIntValue = [](pxr::UsdAttribute& attr) {
     attr.Get(&i);
     return i; 
 };
+
+auto getVtValue = [](pxr::UsdAttribute& attr) {
+    pxr::VtValue v;
+    attr.Get(&v);
+    return v; 
+};
+
 
 """.}
 
@@ -71,7 +79,9 @@ proc getAttribute(p: UsdPrim, s: cstring): UsdAttribute {. importcpp: "#.GetAttr
 
 proc hasAttribute(p: UsdPrim, s: cstring): bool {. importcpp: "#.HasAttribute(pxr::TfToken(#))" .}
 
-proc get(a: UsdAttribute): cint {. importcpp: "getIntValue(#)" .}
+proc get(a: UsdAttribute): VtValue {. importcpp: "getVtValue(#)" .}
+
+proc getTypeName(a: UsdAttribute): SdfValueTypeName {. importcpp: "#.GetTypeName()" .}
 
 when isMainModule:
     echo "---------------------------------------------------------"
@@ -86,15 +96,18 @@ when isMainModule:
         t_curr = traversal.iter_begin()
         t_end = traversal.iter_end()
 
-    #echo "Opened stage rooted at ", $rootLayer.getRealPath() 
     while not iter_eq(t_curr, t_end):
         var prim = t_curr.get()
         t_curr = t_curr.iter_next()
         echo "Prim info: ", prim.getName()
 
         if prim.hasAttribute("foo"):
-            var attr = prim.getAttribute("foo")
-            echo "Attribute value: ", attr.get()
+            var 
+                attr = prim.getAttribute("foo")
+                value = attr.get()
+                tn = attr.getTypeName()
+            echo "Attribute type: ", $tn
+            echo "Attribute value: ", value
 
     echo ""
     echo "---------------------------------------------------------"

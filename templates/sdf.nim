@@ -11,6 +11,8 @@
 #include <string>
 #include <cstdio>
 #include <vector>
+#include <iostream>
+#include <sstream>
 using namespace pxr;
 
 void priv_dumpLayerContentsC(const char* path) 
@@ -39,12 +41,19 @@ pxr::SdfPrimSpecHandle priv_pop(std::vector<pxr::SdfPrimSpecHandle>& v)
     return item;
 }
 
+std::string to_string(pxr::SdfValueTypeName t) {
+    std::stringstream s;
+    s << t; 
+    return s.str();
+}
+
 """.}
 
 const
     sdfLayerHeader = "<###>usd/build/inst/include/pxr/usd/sdf/layer.h"
     sdfHandlesHeader = "<###>usd/build/inst/include/pxr/usd/sdf/declareHandles.h"
     sdfPrimHeader = "<###>usd/build/inst/include/pxr/usd/sdf/primSpec.h"
+    sdfTypesHeader = "<###>usd/build/inst/include/pxr/usd/sdf/types.h"
 
 type
     StdVec[T] {. header: "<vector>", importcpp: "std::vector" .} = object
@@ -60,6 +69,10 @@ type
 
     SdfPrimSpecHandle {. header: sdfHandlesHeader,
                          importcpp: "pxr::SdfPrimSpecHandle".} = object
+
+    SdfValueTypeName {. header: sdfTypesHeader,
+                        importcpp: "pxr::SdfValueTypeName".} = object
+
 
 proc empty(v: StdVec[SdfPrimSpecHandle]): bool {. importcpp: "#.empty()", header: "<vector>" .}
 
@@ -81,6 +94,8 @@ proc getPsuedoroot(l: SdfLayerRefPtr): SdfPrimSpecHandle {. importcpp: "#->GetPs
 
 proc getName(p: SdfPrimSpecHandle): cstring {. importcpp: "(char*)#->GetName().c_str()" 
                                                header: sdfPrimHeader .}
+
+proc `$`(p: SdfValueTypeName): cstring {. importcpp: "(char*)to_string(#).c_str()" .}
 
 when isMainModule:
     var 
