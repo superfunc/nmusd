@@ -119,9 +119,25 @@ jobs:
       - name: Run minimum benchmark suite (platform - macos)
         run: echo "Placeholder"
 
+  # ---------------------------------------------------------------------
+  # windows
+  # ---------------------------------------------------------------------
+  
+  build-windows:
+    runs-on: windows-2019
+    needs: style-check
+    steps:
+      - shell: bash
+      - uses: actions/checkout@v2
+      - name: Install nim dependencies
+        run: |
+          curl -kLSs https://nim-lang.org/choosenim/init.sh -o setup_nim.sh
+          sh setup_nim.sh -y
+      - name: Build library 
+        run: PATH=/home/runner/.nimble/bin:$PATH ./build.sh
   
   # ---------------------------------------------------------------------
-  # macos
+  # docker
   # ---------------------------------------------------------------------
           
   build-docker:
