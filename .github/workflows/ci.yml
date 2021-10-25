@@ -18,16 +18,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/upload-artifact@v2
-        with:
-         name: nmusd-build-linux
-         path: ./
       - name: Install nim dependencies
         run: |
           wget -qO - https://nim-lang.org/choosenim/init.sh > setup_nim.sh
           sh setup_nim.sh -y
       - name: Build library
         run: PATH=/home/runner/.nimble/bin:$PATH ./build.sh
+      - uses: actions/upload-artifact@v2
+        with:
+         name: nmusd-build-linux
+         path: ./
         
   min-test-linux:
     needs: build-linux
@@ -37,4 +37,4 @@ jobs:
         with:
           name: nmusd-build-linux
       - name: Run minimum test suite
-        run: ./run.sh
+        run: sudo ./run.sh
