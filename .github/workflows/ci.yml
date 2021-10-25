@@ -124,6 +124,7 @@ jobs:
   # ---------------------------------------------------------------------
   
   build-windows:
+    if: ${{ false }} # See issue #10
     runs-on: windows-2019
     needs: style-check
     steps:
