@@ -28,11 +28,11 @@ jobs:
         run: ./run.sh
         
   build-docker:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: sudo snap update && sudo snap install docker
+        run: sudo snap refresh && sudo snap install docker
       - name: Build container
         run: docker build -t nmusd_env .
         
