@@ -27,6 +27,16 @@ jobs:
       - name: Run basic checks
         run: ./run.sh
         
+  build-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build container
+        run: |
+          DEBIAN_FRONTEND=noninteractive sudo apt-get update  
+          DEBIAN_FRONTEND=noninteractive sudo apt-get install -y docker.io
+          docker build -t nmusd_env .
+        
   build-macos:
     runs-on: macos-11
     steps:
