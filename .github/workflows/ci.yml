@@ -71,17 +71,6 @@ jobs:
           path: ~/nmusd/
       - name: Run minimum benchmark suite (platform - linux)
         run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
-              
-  fuzz-linux:
-    needs: [bench-linux, test-linux]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: nmusd-build-linux-artifacts
-          path: ~/nmusd/
-      - name: Run fuzzer (platform - linux)
-        run: echo "Hello, placeholder"
         
         
   # ---------------------------------------------------------------------
@@ -129,17 +118,7 @@ jobs:
           path: ~/nmusd/
       - name: Run minimum benchmark suite (platform - macos)
         run: echo "Placeholder"
-        
-  fuzz-macos:
-    needs: [bench-macos, test-macos]
-    runs-on: macos-11
-    steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: nmusd-build-macos-artifacts
-          path: ~/nmusd/
-      - name: Run fuzzer (platform - macos)
-        run: echo "Hello, placeholder"
+
   
   # ---------------------------------------------------------------------
   # macos
@@ -180,26 +159,48 @@ jobs:
           path: ~/nmusd/
       - name: Run minimum benchmark suite (platform - docker)
         run: echo "Placeholder"
-
-  fuzz-docker:
-    needs: [bench-docker, test-docker]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: nmusd-build-docker-artifacts
-          path: ~/nmusd/
-      - name: Run fuzzer (platform - docker)
-        run: echo "Hello, placeholder"
   
 
   # ---------------------------------------------------------------------
   # universal
   # ---------------------------------------------------------------------
-          
+  
+  fuzz-check:
+    needs: [bench-linux, test-linux, bench-macos, test-macos, bench-docker, test-docker]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: nmusd-build-linux-artifacts
+          path: ~/nmusd/
+      - name: Run fuzzer 
+        run: echo "Hello, placeholder"
+  
+  mutate-check:
+    needs: [bench-linux, test-linux, bench-macos, test-macos, bench-docker, test-docker]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: nmusd-build-linux-artifacts
+          path: ~/nmusd/
+      - name: Run mutation testing 
+        run: echo "Hello, placeholder"
+  
+  coverage-check:
+    needs: [bench-linux, test-linux, bench-macos, test-macos, bench-docker, test-docker]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: nmusd-build-linux-artifacts
+          path: ~/nmusd/
+      - name: Run coverage checking 
+        run: echo "Hello, placeholder"
+  
   nimble:
     runs-on: ubuntu-latest
-    needs: [fuzz-linux, fuzz-macos, fuzz-docker]
+    needs: [fuzz-check, mutate-check, coverage-check]
     steps:
       - uses: actions/checkout@v2
       - name: Assemble nimble package
@@ -207,7 +208,7 @@ jobs:
 
   docs:
     runs-on: ubuntu-latest
-    needs: [fuzz-linux, fuzz-macos, fuzz-docker]
+    needs: [fuzz-check, mutate-check, coverage-check]
     steps:
       - uses: actions/checkout@v2
       - name: Generate docs
