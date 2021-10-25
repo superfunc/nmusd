@@ -28,9 +28,10 @@ jobs:
         with:
          name: nmusd-build-linux-artifacts
          path: |
-          ./run.sh
+          ./*.sh
           deps/usd/build/inst/lib/
           ./bin/
+          ./data/
         
   min-test-linux:
     needs: build-linux
@@ -41,7 +42,7 @@ jobs:
           name: nmusd-build-linux-artifacts
           path: ~/nmusd/
       - name: Run minimum test suite
-        run: ls -lR /home/runner/nmusd && cd ~/nmusd/ && sudo ./run.sh
+        run: ls -lR /home/runner/nmusd && cd /home/runner/nmusd && sudo ./run.sh
   
   full-test-linux:
     needs: min-test-linux
