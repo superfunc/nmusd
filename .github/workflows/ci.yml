@@ -27,6 +27,12 @@ jobs:
       - name: Run basic checks
         run: ./run.sh
         
+  run-linux:
+    needs: build-linux
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./run.sh
+      
   build-docker:
     runs-on: ubuntu-latest
     steps:
