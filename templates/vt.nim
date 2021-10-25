@@ -49,6 +49,9 @@ proc has_cdouble(v: VtValue): bool {. header: vtValueHeader,
 
 
 proc has(v: VtValue, t: typedesc): bool =
+
+    # TODO: try to get rid of this void*/interface{} nonsense
+    # currently blocked by a compiler bug in nim cpp/importcpp
     if t is cint:
         has_cint(v)
     elif t is bool:
