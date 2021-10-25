@@ -32,9 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: |
-          DEBIAN_FRONTEND=noninteractive sudo apt-get update  
-          DEBIAN_FRONTEND=noninteractive sudo apt-get install -y docker
+        run: DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y docker
       - name: Build container
         run: docker build -t nmusd_env .
         
