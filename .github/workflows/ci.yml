@@ -136,7 +136,9 @@ jobs:
           sh setup_nim.sh -y
       - name: Build library 
         shell: bash
-        run: PATH=/home/runner/.nimble/bin:$PATH ./build.sh
+        env: 
+          PATH: $PATH:/C/Users/runneradmin/.nimble/bin
+        run: sh ./build.sh
   
   # ---------------------------------------------------------------------
   # docker
