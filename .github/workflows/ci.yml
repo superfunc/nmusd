@@ -58,7 +58,7 @@ jobs:
         with:
           name: nmusd-build-linux-artifacts
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run minimum test suite (platform - linux)
         run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
   
   full-test-linux:
@@ -69,7 +69,7 @@ jobs:
         with:
           name: nmusd-build-linux-artifacts
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run full test suite (platform - linux)
         run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
         
   min-bench-linux:
@@ -80,7 +80,7 @@ jobs:
         with:
           name: nmusd-build-linux-artifacts
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run minimum benchmark suite (platform - linux)
         run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
         
   full-bench-linux:
@@ -91,7 +91,7 @@ jobs:
         with:
           name: nmusd-build-linux
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run full benchmark suite (platform - linux)
         run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
         
   fuzz-linux:
@@ -102,7 +102,7 @@ jobs:
         with:
           name: nmusd-build-linux
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run fuzzer (platform - linux)
         run: echo "Hello, placeholder"
         
         
@@ -138,7 +138,7 @@ jobs:
         with:
           name: nmusd-build-macos-artifacts
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run minimum test suite (platform - macos)
         run: echo "Placeholder"
         
   
@@ -150,7 +150,7 @@ jobs:
         with:
           name: nmusd-build-macos-artifacts
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run full test suite (platform - macos)
         run: echo "Placeholder"
      
   min-bench-macos:
@@ -161,7 +161,7 @@ jobs:
         with:
           name: nmusd-build-macos-artifacts
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run minimum benchmark suite (platform - macos)
         run: echo "Placeholder"
   
   full-bench-macos:
@@ -172,7 +172,7 @@ jobs:
         with:
           name: nmusd-build-macos-artifacts
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run full benchmark suite (platform - macos)
         run: echo "Placeholder"
         
   fuzz-macos:
@@ -183,7 +183,7 @@ jobs:
         with:
           name: nmusd-build-linux
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run fuzzer (platform - macos)
         run: echo "Hello, placeholder"
   
   # ---------------------------------------------------------------------
@@ -210,9 +210,9 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          name: nmusd-build-macos-artifacts
+          name: nmusd-build-docker-artifacts
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run minimum test suite (platform - docker)
         run: echo "Placeholder"
 
   full-test-docker:
@@ -221,9 +221,9 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          name: nmusd-build-macos-artifacts
+          name: nmusd-build-docker-artifacts
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run full test suite (platform - docker)
         run: echo "Placeholder"
         
   min-bench-docker:
@@ -232,9 +232,9 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          name: nmusd-build-macos-artifacts
+          name: nmusd-build-docker-artifacts
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run minimum benchmark suite (platform - docker)
         run: echo "Placeholder"
 
   full-bench-docker:
@@ -245,7 +245,7 @@ jobs:
         with:
           name: nmusd-build-macos-artifacts
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run full benchmark suite (platform - docker)
         run: echo "Placeholder"
 
   fuzz-docker:
@@ -256,7 +256,7 @@ jobs:
         with:
           name: nmusd-build-linux
           path: ~/nmusd/
-      - name: Run minimum test suite
+      - name: Run fuzzer (platform - docker)
         run: echo "Hello, placeholder"
   
 
