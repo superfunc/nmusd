@@ -28,14 +28,15 @@ jobs:
         run: ./run.sh
         
   build-docker:
-    runs-on: ubuntu-latest
+    runs-on: debian-stable
     steps:
       - uses: actions/checkout@v2
-      - name: Build container
+      - name: Install dependencies
         run: |
-          DEBIAN_FRONTEND=noninteractive sudo apt-get update  
-          DEBIAN_FRONTEND=noninteractive sudo apt-get install -y docker.io
-          docker build -t nmusd_env .
+          DEBIAN_FRONTEND=noninteractive apt-get update  
+          DEBIAN_FRONTEND=noninteractive apt-get install -y docker
+      - name: Build container
+        run: docker build -t nmusd_env .
         
   build-macos:
     runs-on: macos-11
