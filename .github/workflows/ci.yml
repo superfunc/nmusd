@@ -27,8 +27,14 @@ jobs:
       - name: Run basic checks
         run: ./run.sh
         
-  run-linux:
+  min-test-linux:
     needs: build-linux
+    runs-on: ubuntu-latest
+    steps:
+      - run: ./run.sh
+      
+  full-test-linux:
+    needs: min-test-linux
     runs-on: ubuntu-latest
     steps:
       - run: ./run.sh
@@ -39,6 +45,18 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build container
         run: docker build -t nmusd_env .
+        
+  min-test-docker:
+    needs: build-docker
+    runs-on: ubuntu-latest
+    steps:
+      - run: docker run -t nmusd_env ./run.sh
+      
+  full-test-docker:
+    needs: min-test-docker
+    runs-on: ubuntu-latest
+    steps:
+      - run: docker run -t nmusd_env ./run.sh
         
   build-macos:
     runs-on: macos-11
@@ -52,3 +70,15 @@ jobs:
         run: PATH=/Users/runner/.nimble/bin:$PATH ./build.sh
       - name: Run basic checks
         run: ./run.sh
+
+  min-test-macos:
+    needs: build-macos
+    runs-on: macos-11
+    steps:
+      - run: ./run.sh
+    
+  full-test-macos:
+    needs: min-test-macos
+    runs-on: macos-11
+    steps:
+      - run: ./run.sh
