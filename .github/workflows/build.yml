@@ -28,7 +28,7 @@ jobs:
         run: ./run.sh
         
   build-docker:
-    runs-on: debian-stable
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
