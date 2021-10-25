@@ -42,7 +42,7 @@ jobs:
           name: nmusd-build-linux-artifacts
           path: ~/nmusd/
       - name: Run minimum test suite
-        run: ls -lR /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
+        run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
   
   full-test-linux:
     needs: min-test-linux
@@ -52,7 +52,7 @@ jobs:
         with:
           name: nmusd-build-linux-artifacts
       - name: Run minimum test suite
-        run: cd /home/runner/work/nmusd/nmusd && sudo ./run.sh
+        run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
         
   min-bench-linux:
     needs: build-linux
@@ -62,7 +62,7 @@ jobs:
         with:
           name: nmusd-build-linux-artifacts
       - name: Run minimum test suite
-        run: cd /home/runner/work/nmusd/nmusd && sudo ./run.sh
+        run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
         
   full-bench-linux:
     needs: min-bench-linux
@@ -72,4 +72,4 @@ jobs:
         with:
           name: nmusd-build-linux
       - name: Run minimum test suite
-        run: cd /home/runner/work/nmusd/nmusd && sudo ./run.sh
+        run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
