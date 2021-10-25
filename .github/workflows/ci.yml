@@ -42,7 +42,7 @@ jobs:
           name: nmusd-build-linux-artifacts
           path: ~/nmusd/
       - name: Run minimum test suite
-        run: ls -lR /home/runner/nmusd && cd /home/runner/nmusd && sudo ./run.sh
+        run: ls -lR /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
   
   full-test-linux:
     needs: min-test-linux
