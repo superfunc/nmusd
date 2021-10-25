@@ -51,6 +51,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: nmusd-build-linux-artifacts
+          path: ~/nmusd/
       - name: Run minimum test suite
         run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
         
@@ -61,6 +62,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: nmusd-build-linux-artifacts
+          path: ~/nmusd/
       - name: Run minimum test suite
         run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
         
@@ -71,5 +73,38 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: nmusd-build-linux
+          path: ~/nmusd/
       - name: Run minimum test suite
         run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
+
+  build-macos:
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install nim dependencies
+        run: |
+          wget -qO - https://nim-lang.org/choosenim/init.sh > setup_nim.sh
+          sh setup_nim.sh -y
+      - name: Build library
+        run: PATH=/home/runner/.nimble/bin:$PATH ./build.sh
+      - uses: actions/upload-artifact@v2
+        with:
+         name: nmusd-build-macos-artifacts
+         path: |
+          ./*.sh
+          deps/usd/build/inst/lib/
+          ./bin/
+          ./data/
+          
+  build-docker:
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build container
+        run: docker build -t nmusd_env .
+      - name: Tar container
+        run: docker save nmusd_env > nmusd_env.tar
+      - uses: actions/upload-artifact@v2
+        with:
+         name: nmusd-build-docker-artifacts
+         path: nmusd_env_tar
