@@ -78,9 +78,7 @@ jobs:
         run: sudo chmod -R +rwx /home/runner/nmusd && cd /home/runner/nmusd && sudo sh ./run.sh
         
   fuzz-linux:
-    needs: |
-      full-bench-linux
-      full-test-linux
+    needs: [full-bench-linux, full-test-linux]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
