@@ -78,7 +78,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          name: nmusd-build-linux
+          name: nmusd-build-linux-artifacts
           path: ~/nmusd/
       - name: Run fuzzer (platform - linux)
         run: echo "Hello, placeholder"
@@ -136,7 +136,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          name: nmusd-build-linux
+          name: nmusd-build-macos-artifacts
           path: ~/nmusd/
       - name: Run fuzzer (platform - macos)
         run: echo "Hello, placeholder"
@@ -187,7 +187,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          name: nmusd-build-linux
+          name: nmusd-build-docker-artifacts
           path: ~/nmusd/
       - name: Run fuzzer (platform - docker)
         run: echo "Hello, placeholder"
