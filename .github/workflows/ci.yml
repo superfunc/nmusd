@@ -136,7 +136,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
          name: nmusd-build-docker-artifacts
-         path: nmusd_env_tar
+         path: nmusd_env.tar
 
   test-docker:
     needs: build-docker
