@@ -38,3 +38,33 @@ jobs:
           name: nmusd-build-linux
       - name: Run minimum test suite
         run: sudo ./run.sh
+  
+  full-test-linux:
+    needs: min-test-linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: nmusd-build-linux
+      - name: Run minimum test suite
+        run: sudo ./run.sh
+        
+  min-bench-linux:
+    needs: build-linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: nmusd-build-linux
+      - name: Run minimum test suite
+        run: sudo ./run.sh
+        
+  full-bench-linux:
+    needs: min-bench-linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: nmusd-build-linux
+      - name: Run minimum test suite
+        run: sudo ./run.sh
