@@ -26,8 +26,11 @@ jobs:
         run: PATH=/home/runner/.nimble/bin:$PATH ./build.sh
       - uses: actions/upload-artifact@v2
         with:
-         name: nmusd-build-linux
-         path: ./
+         name: nmusd-build-linux-run
+         path: |
+          run.sh
+          deps/usd/build/
+          bin/
         
   min-test-linux:
     needs: build-linux
