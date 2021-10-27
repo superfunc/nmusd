@@ -53,6 +53,7 @@ const
     sdfLayerHeader = "<###>usd/build/inst/include/pxr/usd/sdf/layer.h"
     sdfHandlesHeader = "<###>usd/build/inst/include/pxr/usd/sdf/declareHandles.h"
     sdfPrimHeader = "<###>usd/build/inst/include/pxr/usd/sdf/primSpec.h"
+    sdfPropertyHeader = "<###>usd/build/inst/include/pxr/usd/sdf/propertySpec.h"
     sdfTypesHeader = "<###>usd/build/inst/include/pxr/usd/sdf/types.h"
 
 type
@@ -63,6 +64,12 @@ type
 
     SdfLayerRefPtr {. header: sdfHandlesHeader,
                       importcpp: "pxr::SdfLayerRefPtr".} = object
+
+    SdfPropertySpec {. header: sdfPropertyHeader,
+                   importcpp: "pxr::SdfPropertySpec".} = object
+
+    SdfPropertySpecHandle {. header: sdfHandlesHeader,
+                         importcpp: "pxr::SdfPropertySpecHandle".} = object
 
     SdfPrimSpec {. header: sdfPrimHeader,
                    importcpp: "pxr::SdfPrimSpec".} = object
@@ -94,6 +101,10 @@ proc getPsuedoroot(l: SdfLayerRefPtr): SdfPrimSpecHandle {. importcpp: "#->GetPs
 
 proc getName(p: SdfPrimSpecHandle): cstring {. importcpp: "(char*)#->GetName().c_str()" 
                                                header: sdfPrimHeader .}
+
+proc getName(p: SdfPropertySpecHandle): cstring {. importcpp: "(char*)#->GetName().c_str()" 
+                                                   header: sdfPropertyHeader .}
+
 
 proc `$`(p: SdfValueTypeName): cstring {. importcpp: "(char*)to_string(#).c_str()" .}
 
