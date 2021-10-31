@@ -2,6 +2,11 @@
 
 # set -o xtrace 
 
+# nmusd version number (major/minor/patch)
+MJ="0"
+MN="0"
+PT="1"
+
 if ! [ -d "deps/usd" ]; then
     echo "Performing initial build of USD"
     git clone https://github.com/pixaranimationstudios/usd ./deps/usd/
@@ -10,8 +15,9 @@ if ! [ -d "deps/usd" ]; then
     pushd build
     build_dir=$(pwd)
     python3 ../build_scripts/build_usd.py --no-python --no-tools --build-monolithic \
-                                         --no-docs --no-tutorials --no-imaging \
-                                         --no-tests --no-examples --verbose "${build_dir}/inst"
+                        --build-args USD,"-DPXR_SET_EXTERNAL_NAMESPACE=_nmusd_v${MJ}_${MN}_${PT}"
+                        --no-docs --no-tutorials --no-imaging \
+                        --no-tests --no-examples --verbose "${build_dir}/inst"
  
     popd
     popd
