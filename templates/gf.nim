@@ -26,6 +26,10 @@ const
     gfLineSegHeader     = "<###>usd/build/inst/include/pxr/base/gf/lineSeg.h"
     gfLineSeg2dHeader   = "<###>usd/build/inst/include/pxr/base/gf/lineSeg2d.h"
     gfTransformHeader   = "<###>usd/build/inst/include/pxr/base/gf/transform.h"
+    gfMatrix3fHeader    = "<###>usd/build/inst/include/pxr/base/gf/matrix3f.h"
+    gfMatrix3dHeader    = "<###>usd/build/inst/include/pxr/base/gf/matrix3d.h"
+    gfMatrix4fHeader    = "<###>usd/build/inst/include/pxr/base/gf/matrix4f.h"
+    gfMatrix4dHeader    = "<###>usd/build/inst/include/pxr/base/gf/matrix4d.h"
 
 type
     GfHalf {.header: gfHalfHeader,
@@ -72,6 +76,18 @@ type
 
     GfVec4h {.header: gfVec4hHeader,
               importcpp: "GfVec4h".} = object
+
+    GfMatrix3d {.header: gfMatrix3dHeader,
+                 importcpp: "GfMatrix3d".} = object
+
+    GfMatrix3f {.header: gfMatrix3fHeader,
+                 importcpp: "GfMatrix3f".} = object
+
+    GfMatrix4d {.header: gfMatrix4dHeader,
+                 importcpp: "GfMatrix4d".} = object
+
+    GfMatrix4f {.header: gfMatrix4fHeader,
+                 importcpp: "GfMatrix4f".} = object
 
     GfLine {.header: gfLineHeader,
              importcpp: "GfLine".} = object
@@ -133,10 +149,8 @@ proc CreateGfVec3h(): GfVec3h {. header: gfVec3hHeader,
 proc CreateGfVec4i(): GfVec4i {. header: gfVec4iHeader,
                                  importcpp: "GfVec4i()" .}
 
-
 proc CreateGfVec4f(): GfVec4f {. header: gfVec4fHeader,
                                  importcpp: "GfVec4f()" .}
-
 
 proc CreateGfVec4d(): GfVec4d {. header: gfVec4dHeader,
                                  importcpp: "GfVec4d()" .}
@@ -158,6 +172,12 @@ proc CreateGfLineSeg2d(): GfLineSeg2d {. header: gfLineSeg2dHeader,
 
 proc CreateGfTransform(): GfTransform {. header: gfTransformHeader,
                                          importcpp: "GfTransform()" .}
+
+proc CreateGfMatrix4f(): GfMatrix4f {. header: gfMatrix4fHeader,
+                                       importcpp: "GfMatrix4f()" .}
+
+proc CreateGfMatrix4d(): GfMatrix4d {. header: gfMatrix4dHeader,
+                                       importcpp: "GfMatrix4d()" .}
 
 
 echo "Gf module"
@@ -182,5 +202,7 @@ var
     l2 = CreateGfLine2d()
     l2s = CreateGfLineSeg2d()
     t = CreateGfTransform()
+    md = CreateGfMatrix4d()
+    mf = CreateGfMatrix4f()
 
-echo "Created types (size, vecs, lines, transform)"
+echo "Created types (size, vecs, lines, transform, matrix)"
