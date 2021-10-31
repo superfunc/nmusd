@@ -14,7 +14,7 @@ nm_usdlib_path="${curr}/deps/usd/build/inst/"
 if [ -z "${NMUSD_CUSTOM_USD_BUILD_PATH}" ]; then
     if ! [ -d "deps/usd" ]; then
         echo "Performing initial build of USD"
-        git clone https://github.com/pixaranimationstudios/usd ./deps/usd/
+        git clone --depth 1 --branch v21.08 https://github.com/pixaranimationstudios/usd ./deps/usd/
         pushd deps/usd
         mkdir -p build/inst
         pushd build
