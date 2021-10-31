@@ -20,7 +20,7 @@ if [ -z "${NMUSD_CUSTOM_USD_BUILD_PATH}" ]; then
         pushd build
         build_dir=$(pwd)
         python3 ../build_scripts/build_usd.py --no-python --no-tools --build-monolithic \
-                            --build-args USD,"-DPXR_SET_EXTERNAL_NAMESPACE=_nmusd_v${mj}_${mn}_${pt}" \
+                            --build-args USD,"-DPXR_SET_INTERNAL_NAMESPACE=_nmusd_v${mj}_${mn}_${pt}" \
                             --no-docs --no-tutorials --no-imaging \
                             --no-tests --no-examples --verbose "${build_dir}/inst"
      
