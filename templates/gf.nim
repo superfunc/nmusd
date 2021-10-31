@@ -6,21 +6,25 @@ using namespace pxr;
 """.}
 
 const
-    gfHalfHeader = "<###>usd/build/inst/include/pxr/base/gf/half.h"
-    gfSize2Header = "<###>usd/build/inst/include/pxr/base/gf/size2.h"
-    gfSize3Header = "<###>usd/build/inst/include/pxr/base/gf/size3.h"
-    gfVec2iHeader = "<###>usd/build/inst/include/pxr/base/gf/vec2i.h"
-    gfVec2fHeader = "<###>usd/build/inst/include/pxr/base/gf/vec2f.h"
-    gfVec2dHeader = "<###>usd/build/inst/include/pxr/base/gf/vec2d.h"
-    gfVec2hHeader = "<###>usd/build/inst/include/pxr/base/gf/vec2h.h"
-    gfVec3iHeader = "<###>usd/build/inst/include/pxr/base/gf/vec3i.h"
-    gfVec3fHeader = "<###>usd/build/inst/include/pxr/base/gf/vec3f.h"
-    gfVec3dHeader = "<###>usd/build/inst/include/pxr/base/gf/vec3d.h"
-    gfVec3hHeader = "<###>usd/build/inst/include/pxr/base/gf/vec3h.h"
-    gfVec4iHeader = "<###>usd/build/inst/include/pxr/base/gf/vec4i.h"
-    gfVec4fHeader = "<###>usd/build/inst/include/pxr/base/gf/vec4f.h"
-    gfVec4dHeader = "<###>usd/build/inst/include/pxr/base/gf/vec4d.h"
-    gfVec4hHeader = "<###>usd/build/inst/include/pxr/base/gf/vec4h.h"
+    gfHalfHeader        = "<###>usd/build/inst/include/pxr/base/gf/half.h"
+    gfSize2Header       = "<###>usd/build/inst/include/pxr/base/gf/size2.h"
+    gfSize3Header       = "<###>usd/build/inst/include/pxr/base/gf/size3.h"
+    gfVec2iHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec2i.h"
+    gfVec2fHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec2f.h"
+    gfVec2dHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec2d.h"
+    gfVec2hHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec2h.h"
+    gfVec3iHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec3i.h"
+    gfVec3fHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec3f.h"
+    gfVec3dHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec3d.h"
+    gfVec3hHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec3h.h"
+    gfVec4iHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec4i.h"
+    gfVec4fHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec4f.h"
+    gfVec4dHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec4d.h"
+    gfVec4hHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec4h.h"
+    gfLineHeader        = "<###>usd/build/inst/include/pxr/base/gf/line.h"
+    gfLine2dHeader      = "<###>usd/build/inst/include/pxr/base/gf/line2d.h"
+    gfLineSegHeader     = "<###>usd/build/inst/include/pxr/base/gf/lineSeg.h"
+    gfLineSeg2dHeader   = "<###>usd/build/inst/include/pxr/base/gf/lineSeg2d.h"
 
 type
     GfHalf {.header: gfHalfHeader,
@@ -67,6 +71,18 @@ type
 
     GfVec4h {.header: gfVec4hHeader,
               importcpp: "GfVec4h".} = object
+
+    GfLine {.header: gfLineHeader,
+             importcpp: "GfLine".} = object
+
+    GfLineSeg {.header: gfLineSegHeader,
+                importcpp: "GfLineSeg".} = object
+
+    GfLine2d {.header: gfLine2dHeader,
+               importcpp: "GfLine2d".} = object
+
+    GfLineSeg2d {.header: gfLineSeg2dHeader,
+                  importcpp: "GfLineSeg2d".} = object
 
 
 proc CreateGfHalf(): GfHalf {. header: gfHalfHeader,
@@ -122,9 +138,21 @@ proc CreateGfVec4f(): GfVec4f {. header: gfVec4fHeader,
 proc CreateGfVec4d(): GfVec4d {. header: gfVec4dHeader,
                                  importcpp: "GfVec4d()" .}
 
-
 proc CreateGfVec4h(): GfVec4h {. header: gfVec4hHeader,
                                  importcpp: "GfVec4h()" .}
+
+proc CreateGfLine(): GfLine {. header: gfLineHeader,
+                               importcpp: "GfLine()" .}
+
+proc CreateGfLine2d(): GfLine2d {. header: gfLine2dHeader,
+                                   importcpp: "GfLine2d()" .}
+
+proc CreateGfLineSeg(): GfLineSeg {. header: gfLineSegHeader,
+                                     importcpp: "GfLineSeg()" .}
+
+proc CreateGfLineSeg2d(): GfLineSeg2d {. header: gfLineSeg2dHeader,
+                                         importcpp: "GfLineSeg2d()" .}
+
 
 echo "Gf module"
 
@@ -143,5 +171,9 @@ var
     v4f = CreateGfVec4f()
     v4d = CreateGfVec4d()
     v4h = CreateGfVec4h()
+    l = CreateGfLine()
+    ls = CreateGfLineSeg()
+    l2 = CreateGfLine2d()
+    l2s = CreateGfLineSeg2d()
 
-echo "Created types (size, vecs)"
+echo "Created types (size, vecs, lines)"
