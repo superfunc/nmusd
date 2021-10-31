@@ -1,0 +1,49 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+
+jobs:
+
+  build-linux:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install nim dependencies
+        run: |
+          wget -qO - https://nim-lang.org/choosenim/init.sh > setup_nim.sh
+          sh setup_nim.sh -y
+      - name: Build Custom USD
+        run: |
+          mkdir custom_usd/
+          cd custom_usd/
+          git clone --depth 1 --branch v21.08 https://github.com/pixaranimationstudios/usd ./usd/ 
+          mkdir -p build/inst
+          pushd build
+          build_dir=$(pwd)
+          python3 ../build_scripts/build_usd.py --no-python --no-tools --build-monolithic \
+                            --build-args USD,"-DPXR_SET_INTERNAL_NAMESPACE=_nmusd_v${mj}_${mn}_${pt}" \
+                            --no-docs --no-tutorials --no-imaging \
+                            --no-tests --no-examples --verbose "${build_dir}/inst"
+          cd ~
+      - name: Build library
+        run: PATH=/home/runner/.nimble/bin:$PATH NMUSD_CUSTOM_USD_BUILD_PATH=~/custom_usd/usd/build/inst/ ./build.sh
+      - uses: actions/upload-artifact@v2
+        with:
+         name: nmusd-build-linux-artifacts
+         path: |
+          ./*.sh
+          deps/usd/build/inst/lib/
+          ./bin/
+          ./data/
