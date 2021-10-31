@@ -29,8 +29,8 @@ jobs:
           mkdir custom_usd/
           cd custom_usd/
           git clone --depth 1 --branch v21.08 https://github.com/pixaranimationstudios/usd ./usd/ 
-          mkdir -p build/inst
-          pushd build
+          mkdir -p ./usd/build/inst
+          pushd ./usd/build
           build_dir=$(pwd)
           python3 ../build_scripts/build_usd.py --no-python --no-tools --build-monolithic \
                             --build-args USD,"-DPXR_SET_INTERNAL_NAMESPACE=_nmusd_v${mj}_${mn}_${pt}" \
