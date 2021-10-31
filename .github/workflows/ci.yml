@@ -23,7 +23,7 @@ jobs:
   style-check:
     runs-on: ubuntu-20.04
     steps:
-      - name: Run minimum test suite
+      - name: Run basic linters
         run: echo "style check"
         
   # ---------------------------------------------------------------------
