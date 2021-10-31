@@ -2,27 +2,35 @@
 
 # set -o xtrace 
 
-# nmusd version number (major/minor/patch)
-MJ="0"
-MN="0"
-PT="1"
+curr=$(pwd)
 
-if ! [ -d "deps/usd" ]; then
-    echo "Performing initial build of USD"
-    git clone https://github.com/pixaranimationstudios/usd ./deps/usd/
-    pushd deps/usd
-    mkdir -p build/inst
-    pushd build
-    build_dir=$(pwd)
-    python3 ../build_scripts/build_usd.py --no-python --no-tools --build-monolithic \
-                        --build-args USD,"-DPXR_SET_EXTERNAL_NAMESPACE=_nmusd_v${MJ}_${MN}_${PT}"
-                        --no-docs --no-tutorials --no-imaging \
-                        --no-tests --no-examples --verbose "${build_dir}/inst"
- 
-    popd
-    popd
+# nmusd version number (major/minor/patch)
+mj="0"
+mn="0"
+pt="1"
+
+nm_usdlib_path="${curr}/deps/usd/build/inst/"
+
+if [ -z "${NMUSD_CUSTOM_USD_BUILD_PATH}" ]; then
+    if ! [ -d "deps/usd" ]; then
+        echo "Performing initial build of USD"
+        git clone https://github.com/pixaranimationstudios/usd ./deps/usd/
+        pushd deps/usd
+        mkdir -p build/inst
+        pushd build
+        build_dir=$(pwd)
+        python3 ../build_scripts/build_usd.py --no-python --no-tools --build-monolithic \
+                            --build-args USD,"-DPXR_SET_EXTERNAL_NAMESPACE=_nmusd_v${mj}_${mn}_${pt}" \
+                            --no-docs --no-tutorials --no-imaging \
+                            --no-tests --no-examples --verbose "${build_dir}/inst"
+     
+        popd
+        popd
+    else
+        echo "USD already built, building nim bindings"
+    fi
 else
-    echo "USD already built, building nim bindings"
+    nm_usdlib_path="${NMUSD_CUSTOM_USD_BUILD_PATH}"
 fi
 
 lib_ext="so"
@@ -30,16 +38,14 @@ if [[ $OSTYPE == "darwin"* ]]; then
     lib_ext="dylib"
 fi
 
-
-curr=$(pwd)
 for f in ./templates/*.nim; do
     generated_name=$(echo "$f" | sed -e "s/templates/src/g")
     binary_name=$(echo "$generated_name" | rev | cut -d'.' -f2 | cut -d'/' -f1 | rev)
     sed "s@<###>@$curr\/deps\/@g" $f > /tmp/nmusd_build_artifact
     sed "s@{!!!}@$lib_ext@g" /tmp/nmusd_build_artifact > $generated_name
     
-    export _INCLUDES="${curr}/deps/usd/build/inst/include/"
-    export _LIBDIR="${curr}/deps/usd/build/inst/lib/"
+    export _INCLUDES="${nm_usdlib_path}/include/"
+    export _LIBDIR="${nm_usdlib_path}/lib/"
     nim cpp --cincludes:"$_INCLUDES" \
             --clibdir:"$_LIBDIR" \
             --passL:-lusd_ms \
