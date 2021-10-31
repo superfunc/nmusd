@@ -21,7 +21,7 @@ jobs:
   # prelims
   # ---------------------------------------------------------------------
   style-check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Run minimum test suite
         run: echo "style check"
@@ -31,7 +31,7 @@ jobs:
   # ---------------------------------------------------------------------
 
   build-linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: style-check
     steps:
       - uses: actions/checkout@v2
@@ -52,7 +52,7 @@ jobs:
         
   test-linux:
     needs: build-linux
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/download-artifact@v2
         with:
@@ -63,7 +63,7 @@ jobs:
   
   bench-linux:
     needs: build-linux
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/download-artifact@v2
         with:
@@ -146,7 +146,7 @@ jobs:
   # ---------------------------------------------------------------------
           
   build-docker:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: style-check
     steps:
       - uses: actions/checkout@v2
@@ -161,7 +161,7 @@ jobs:
 
   test-docker:
     needs: build-docker
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/download-artifact@v2
         with:
@@ -172,7 +172,7 @@ jobs:
 
   bench-docker:
     needs: build-docker
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/download-artifact@v2
         with:
@@ -188,7 +188,7 @@ jobs:
   
   fuzz-check:
     needs: [bench-linux, test-linux, bench-macos, test-macos, bench-docker, test-docker]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/download-artifact@v2
         with:
@@ -199,7 +199,7 @@ jobs:
   
   mutate-check:
     needs: [bench-linux, test-linux, bench-macos, test-macos, bench-docker, test-docker]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/download-artifact@v2
         with:
@@ -210,7 +210,7 @@ jobs:
   
   coverage-check:
     needs: [bench-linux, test-linux, bench-macos, test-macos, bench-docker, test-docker]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/download-artifact@v2
         with:
@@ -220,7 +220,7 @@ jobs:
         run: echo "Hello, placeholder"
   
   nimble:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: [fuzz-check, mutate-check, coverage-check]
     steps:
       - uses: actions/checkout@v2
@@ -228,7 +228,7 @@ jobs:
         run: echo "Placeholder"
 
   docs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: [fuzz-check, mutate-check, coverage-check]
     steps:
       - uses: actions/checkout@v2
