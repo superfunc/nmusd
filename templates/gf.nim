@@ -25,6 +25,7 @@ const
     gfLine2dHeader      = "<###>usd/build/inst/include/pxr/base/gf/line2d.h"
     gfLineSegHeader     = "<###>usd/build/inst/include/pxr/base/gf/lineSeg.h"
     gfLineSeg2dHeader   = "<###>usd/build/inst/include/pxr/base/gf/lineSeg2d.h"
+    gfTransformHeader   = "<###>usd/build/inst/include/pxr/base/gf/transform.h"
 
 type
     GfHalf {.header: gfHalfHeader,
@@ -84,6 +85,8 @@ type
     GfLineSeg2d {.header: gfLineSeg2dHeader,
                   importcpp: "GfLineSeg2d".} = object
 
+    GfTransform {.header: gfTransformHeader,
+                  importcpp: "GfTransform".} = object
 
 proc CreateGfHalf(): GfHalf {. header: gfHalfHeader,
                                importcpp: "GfHalf()" .}
@@ -153,6 +156,9 @@ proc CreateGfLineSeg(): GfLineSeg {. header: gfLineSegHeader,
 proc CreateGfLineSeg2d(): GfLineSeg2d {. header: gfLineSeg2dHeader,
                                          importcpp: "GfLineSeg2d()" .}
 
+proc CreateGfTransform(): GfTransform {. header: gfTransformHeader,
+                                         importcpp: "GfTransform()" .}
+
 
 echo "Gf module"
 
@@ -175,5 +181,6 @@ var
     ls = CreateGfLineSeg()
     l2 = CreateGfLine2d()
     l2s = CreateGfLineSeg2d()
+    t = CreateGfTransform()
 
-echo "Created types (size, vecs, lines)"
+echo "Created types (size, vecs, lines, transform)"
