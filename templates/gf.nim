@@ -30,10 +30,14 @@ const
     gfMatrix3dHeader    = "<###>include/pxr/base/gf/matrix3d.h"
     gfMatrix4fHeader    = "<###>include/pxr/base/gf/matrix4f.h"
     gfMatrix4dHeader    = "<###>include/pxr/base/gf/matrix4d.h"
+    gfRayHeader         = "<###>include/pxr/base/gf/ray.h"
 
 type
     GfHalf {.header: gfHalfHeader,
              importcpp: "GfHalf".} = object
+
+    GfRay {.header: gfRayHeader,
+            importcpp: "GfRay".} = object
 
     GfSize2 {.header: gfSize2Header,
               importcpp: "GfSize2".} = object
@@ -107,6 +111,8 @@ type
 proc CreateGfHalf(): GfHalf {. header: gfHalfHeader,
                                importcpp: "GfHalf()" .}
 
+proc CreateGfRay(): GfRay {. header: gfRayHeader,
+                               importcpp: "GfRay()" .}
 
 proc CreateGfSize2(): GfSize2 {. header: gfSize2Header,
                                 importcpp: "GfSize2()" .}
@@ -204,5 +210,6 @@ var
     t = CreateGfTransform()
     md = CreateGfMatrix4d()
     mf = CreateGfMatrix4f()
+    r = CreateGfRay()
 
-echo "Created types (size, vecs, lines, transform, matrix)"
+echo "Created types (size, vecs, lines, transform, matrix, ray)"
