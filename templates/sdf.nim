@@ -1,4 +1,4 @@
-{.link: "<###>usd/build/inst/lib/libusd_ms.{!!!}".}
+{.link: "<###>lib/libusd_ms.{!!!}".}
 
 {.emit:"""
 #include <pxr/pxr.h>
@@ -50,11 +50,11 @@ std::string to_string(pxr::SdfValueTypeName t) {
 """.}
 
 const
-    sdfLayerHeader = "<###>usd/build/inst/include/pxr/usd/sdf/layer.h"
-    sdfHandlesHeader = "<###>usd/build/inst/include/pxr/usd/sdf/declareHandles.h"
-    sdfPrimHeader = "<###>usd/build/inst/include/pxr/usd/sdf/primSpec.h"
-    sdfPropertyHeader = "<###>usd/build/inst/include/pxr/usd/sdf/propertySpec.h"
-    sdfTypesHeader = "<###>usd/build/inst/include/pxr/usd/sdf/types.h"
+    sdfLayerHeader = "<###>include/pxr/usd/sdf/layer.h"
+    sdfHandlesHeader = "<###>include/pxr/usd/sdf/declareHandles.h"
+    sdfPrimHeader = "<###>include/pxr/usd/sdf/primSpec.h"
+    sdfPropertyHeader = "<###>include/pxr/usd/sdf/propertySpec.h"
+    sdfTypesHeader = "<###>include/pxr/usd/sdf/types.h"
 
 type
     StdVec[T] {. header: "<vector>", importcpp: "std::vector" .} = object

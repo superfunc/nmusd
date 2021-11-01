@@ -1,4 +1,4 @@
-{.link: "<###>usd/build/inst/lib/libusd_ms.{!!!}".}
+{.link: "<###>lib/libusd_ms.{!!!}".}
 
 {.emit:"""
 #include <pxr/pxr.h>
@@ -8,7 +8,7 @@ using namespace pxr;
 import options
 
 const
-    vtValueHeader = "<###>usd/build/inst/include/pxr/base/vt/value.h"
+    vtValueHeader = "<###>include/pxr/base/vt/value.h"
 
 type
     VtValue {.header: vtValueHeader,

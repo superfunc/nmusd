@@ -1,7 +1,7 @@
 include ./sdf
 include ./vt
 
-{.link: "<###>usd/build/inst/lib/libusd_ms.{!!!}".}
+{.link: "<###>lib/libusd_ms.{!!!}".}
 
 {.emit:"""
 #include <pxr/pxr.h>
@@ -29,10 +29,10 @@ auto getVtValue = [](pxr::UsdAttribute& attr) {
 """.}
 
 const
-    usdStageHeader = "<###>usd/build/inst/include/pxr/usd/usd/stage.h"
-    usdPrimHeader = "<###>usd/build/inst/include/pxr/usd/usd/prim.h"
-    usdAttributeHeader = "<###>usd/build/inst/include/pxr/usd/usd/attribute.h"
-    usdPrimRangeHeader = "<###>usd/build/inst/include/pxr/usd/usd/primRange.h"
+    usdStageHeader = "<###>include/pxr/usd/usd/stage.h"
+    usdPrimHeader = "<###>include/pxr/usd/usd/prim.h"
+    usdAttributeHeader = "<###>include/pxr/usd/usd/attribute.h"
+    usdPrimRangeHeader = "<###>include/pxr/usd/usd/primRange.h"
 
 type
     UsdStage {.header: usdStageHeader,

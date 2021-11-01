@@ -41,7 +41,7 @@ fi
 for f in ./templates/*.nim; do
     generated_name=$(echo "$f" | sed -e "s/templates/src/g")
     binary_name=$(echo "$generated_name" | rev | cut -d'.' -f2 | cut -d'/' -f1 | rev)
-    sed "s@<###>@$curr\/deps\/@g" $f > /tmp/nmusd_build_artifact
+    sed "s@<###>@$nm_usdlib_path@g" $f > /tmp/nmusd_build_artifact
     sed "s@{!!!}@$lib_ext@g" /tmp/nmusd_build_artifact > $generated_name
     
     export _INCLUDES="${nm_usdlib_path}/include/"

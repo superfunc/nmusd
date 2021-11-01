@@ -1,4 +1,4 @@
-{.link: "<###>usd/build/inst/lib/libusd_ms.{!!!}".}
+{.link: "<###>lib/libusd_ms.{!!!}".}
 
 {.emit:"""
 #include <pxr/pxr.h>
@@ -6,30 +6,30 @@ using namespace pxr;
 """.}
 
 const
-    gfHalfHeader        = "<###>usd/build/inst/include/pxr/base/gf/half.h"
-    gfSize2Header       = "<###>usd/build/inst/include/pxr/base/gf/size2.h"
-    gfSize3Header       = "<###>usd/build/inst/include/pxr/base/gf/size3.h"
-    gfVec2iHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec2i.h"
-    gfVec2fHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec2f.h"
-    gfVec2dHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec2d.h"
-    gfVec2hHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec2h.h"
-    gfVec3iHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec3i.h"
-    gfVec3fHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec3f.h"
-    gfVec3dHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec3d.h"
-    gfVec3hHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec3h.h"
-    gfVec4iHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec4i.h"
-    gfVec4fHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec4f.h"
-    gfVec4dHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec4d.h"
-    gfVec4hHeader       = "<###>usd/build/inst/include/pxr/base/gf/vec4h.h"
-    gfLineHeader        = "<###>usd/build/inst/include/pxr/base/gf/line.h"
-    gfLine2dHeader      = "<###>usd/build/inst/include/pxr/base/gf/line2d.h"
-    gfLineSegHeader     = "<###>usd/build/inst/include/pxr/base/gf/lineSeg.h"
-    gfLineSeg2dHeader   = "<###>usd/build/inst/include/pxr/base/gf/lineSeg2d.h"
-    gfTransformHeader   = "<###>usd/build/inst/include/pxr/base/gf/transform.h"
-    gfMatrix3fHeader    = "<###>usd/build/inst/include/pxr/base/gf/matrix3f.h"
-    gfMatrix3dHeader    = "<###>usd/build/inst/include/pxr/base/gf/matrix3d.h"
-    gfMatrix4fHeader    = "<###>usd/build/inst/include/pxr/base/gf/matrix4f.h"
-    gfMatrix4dHeader    = "<###>usd/build/inst/include/pxr/base/gf/matrix4d.h"
+    gfHalfHeader        = "<###>include/pxr/base/gf/half.h"
+    gfSize2Header       = "<###>include/pxr/base/gf/size2.h"
+    gfSize3Header       = "<###>include/pxr/base/gf/size3.h"
+    gfVec2iHeader       = "<###>include/pxr/base/gf/vec2i.h"
+    gfVec2fHeader       = "<###>include/pxr/base/gf/vec2f.h"
+    gfVec2dHeader       = "<###>include/pxr/base/gf/vec2d.h"
+    gfVec2hHeader       = "<###>include/pxr/base/gf/vec2h.h"
+    gfVec3iHeader       = "<###>include/pxr/base/gf/vec3i.h"
+    gfVec3fHeader       = "<###>include/pxr/base/gf/vec3f.h"
+    gfVec3dHeader       = "<###>include/pxr/base/gf/vec3d.h"
+    gfVec3hHeader       = "<###>include/pxr/base/gf/vec3h.h"
+    gfVec4iHeader       = "<###>include/pxr/base/gf/vec4i.h"
+    gfVec4fHeader       = "<###>include/pxr/base/gf/vec4f.h"
+    gfVec4dHeader       = "<###>include/pxr/base/gf/vec4d.h"
+    gfVec4hHeader       = "<###>include/pxr/base/gf/vec4h.h"
+    gfLineHeader        = "<###>include/pxr/base/gf/line.h"
+    gfLine2dHeader      = "<###>include/pxr/base/gf/line2d.h"
+    gfLineSegHeader     = "<###>include/pxr/base/gf/lineSeg.h"
+    gfLineSeg2dHeader   = "<###>include/pxr/base/gf/lineSeg2d.h"
+    gfTransformHeader   = "<###>include/pxr/base/gf/transform.h"
+    gfMatrix3fHeader    = "<###>include/pxr/base/gf/matrix3f.h"
+    gfMatrix3dHeader    = "<###>include/pxr/base/gf/matrix3d.h"
+    gfMatrix4fHeader    = "<###>include/pxr/base/gf/matrix4f.h"
+    gfMatrix4dHeader    = "<###>include/pxr/base/gf/matrix4d.h"
 
 type
     GfHalf {.header: gfHalfHeader,

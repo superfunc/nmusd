@@ -1,4 +1,4 @@
-{.link: "<###>usd/build/inst/lib/libusd_ms.{!!!}".}
+{.link: "<###>lib/libusd_ms.{!!!}".}
 
 {.emit:"""
 #include <pxr/pxr.h>
@@ -6,7 +6,7 @@ using namespace pxr;
 """.}
 
 const
-    tf = "<###>usd/build/inst/include/pxr/base/tf/token.h"
+    tf = "<###>include/pxr/base/tf/token.h"
 
 type
     TfTokenObj {.header: tf,
