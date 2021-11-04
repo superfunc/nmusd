@@ -73,6 +73,21 @@ proc iter_eq(pr1: UsdPrimRangeIter, pr2: UsdPrimRangeIter): bool {. importcpp: "
 
 proc get(pr: UsdPrimRangeIter): UsdPrim {. importcpp: "*#" .}
 
+# TODO: Still figuring out naming conventions, but worry about
+# this once we have most of the useful parts stubbed out and 
+# the tests ported
+type 
+    Range = object
+        impl: UsdPrimRange
+
+iterator items(range: Range): UsdPrim =
+    var current = iter_begin(range.impl)
+    var last = iter_end(range.impl) 
+    while not iter_eq(current, last):
+        yield current.get()
+        current = current.iter_next()
+
+
 proc getName(p: UsdPrim): cstring {. importcpp: "(char*)#.GetName().data()" .}
 
 proc getAttribute(p: UsdPrim, s: cstring): UsdAttribute {. importcpp: "#.GetAttribute(pxr::TfToken(#))" .}
@@ -93,12 +108,9 @@ when isMainModule:
         stage = openUsdStage("./data/layer.usd")
         rootLayer = stage.getRootLayer()
         traversal = stage.traverse()
-        t_curr = traversal.iter_begin()
-        t_end = traversal.iter_end()
 
-    while not iter_eq(t_curr, t_end):
-        var prim = t_curr.get()
-        t_curr = t_curr.iter_next()
+    echo "Nim style iterator for USD Prim Range"
+    for prim in Range(impl: stage.traverse()):
         echo "Prim info: ", prim.getName()
 
         if prim.hasAttribute("foo"):
