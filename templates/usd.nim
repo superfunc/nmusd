@@ -77,10 +77,13 @@ proc get(pr: UsdPrimRangeIter): UsdPrim {. importcpp: "*#" .}
 # this once we have most of the useful parts stubbed out and 
 # the tests ported
 type 
-    Range = object
+    TUsdPrimRange = object
         impl: UsdPrimRange
 
-iterator items(range: Range): UsdPrim =
+proc iter(pr: UsdPrimRange) : TUsdPrimRange =
+    TUsdPrimRange(impl: pr)
+
+iterator items(range: TUsdPrimRange): UsdPrim =
     var current = iter_begin(range.impl)
     var last = iter_end(range.impl) 
     while not iter_eq(current, last):
@@ -109,8 +112,9 @@ when isMainModule:
         rootLayer = stage.getRootLayer()
         traversal = stage.traverse()
 
-    echo "Nim style iterator for USD Prim Range"
-    for prim in Range(impl: stage.traverse()):
+    echo "Nim style iterator, for USD Prim Range"
+
+    for prim in iter(stage.traverse()):
         echo "Prim info: ", prim.getName()
 
         if prim.hasAttribute("foo"):
