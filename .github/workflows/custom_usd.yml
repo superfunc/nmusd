@@ -39,7 +39,7 @@ jobs:
           cd ~
       - name: Build library
         # Actual output dir: /home/runner/work/nmusd/nmusd/custom_usd/usd/build/inst/
-        run: PATH=/home/runner/.nimble/bin:$PATH NMUSD_CUSTOM_USD_BUILD_PATH=~/work/nmusd/nmusd/custom_usd/usd/build/inst/ ./build.sh
+        run: PATH=/home/runner/.nimble/bin:$PATH NMUSD_CUSTOM_USD_BUILD_PATH=~/work/nmusd/nmusd/custom_usd/usd/build/inst/ ./build_just_nmusd.sh
       - uses: actions/upload-artifact@v2
         with:
          name: nmusd-build-linux-artifacts
