@@ -8,11 +8,11 @@ RUN mkdir -p /home/nmusd/base/src/
 
 COPY templates/ /home/nmusd/base/templates/
 COPY data/ /home/nmusd/base/
-COPY build.sh /home/nmusd/base/
+COPY build_all.sh /home/nmusd/base/
 COPY run.sh /home/nmusd/base/
 
 ENV PATH="~/.nimble/bin/:${PATH}"
 
-RUN cd /home/nmusd/base && ./build.sh
+RUN cd /home/nmusd/base && ./build_all.sh
 
 WORKDIR "/home/nmusd/base/"
