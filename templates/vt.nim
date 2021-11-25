@@ -75,31 +75,32 @@ proc get(v: VtValue): Option[cint] =
 proc set(v: var VtValue, k: cint): VtValue =
     v = priv_take(k)
 
-echo "Vt module"
-echo "--------------------------------------------------"
-
-let x : cint = 5
-var v = createVtValue(61)
-echo "Is empty?", v.isEmpty(), " ", repr(v.addr)
-echo "Is holding?", priv_isHolding(v)
-echo "Is holding <typed int>?", has(v, cint)
-echo "Is holding <typed bool>?", has(v, bool)
-echo "Get value: ", v.get()
-#v.set(65)
-echo "Is empty?", v.isEmpty(), " ", repr(v.addr)
-echo "Is holding?", priv_isHolding(v)
-echo "Get value: ", v.get()
-
-echo ""
-
-var v2 = createVtValue()
-echo "Is empty?", v2.isEmpty(), " ", repr(v2.addr)
-echo "Is holding?", priv_isHolding(v2)
-#v2 = v2.set(65)
-echo "Is empty?", v2.isEmpty(), " ", repr(v2.addr)
-echo "Is holding?", priv_isHolding(v2)
-echo "Get value: ", v2.get()
-
-echo "--------------------------------------------------"
-echo "End Vt module"
-echo "--------------------------------------------------"
+when isMainModule():
+    echo "Vt module"
+    echo "--------------------------------------------------"
+    
+    let x : cint = 5
+    var v = createVtValue(61)
+    echo "Is empty?", v.isEmpty(), " ", repr(v.addr)
+    echo "Is holding?", priv_isHolding(v)
+    echo "Is holding <typed int>?", has(v, cint)
+    echo "Is holding <typed bool>?", has(v, bool)
+    echo "Get value: ", v.get()
+    #v.set(65)
+    echo "Is empty?", v.isEmpty(), " ", repr(v.addr)
+    echo "Is holding?", priv_isHolding(v)
+    echo "Get value: ", v.get()
+    
+    echo ""
+    
+    var v2 = createVtValue()
+    echo "Is empty?", v2.isEmpty(), " ", repr(v2.addr)
+    echo "Is holding?", priv_isHolding(v2)
+    #v2 = v2.set(65)
+    echo "Is empty?", v2.isEmpty(), " ", repr(v2.addr)
+    echo "Is holding?", priv_isHolding(v2)
+    echo "Get value: ", v2.get()
+    
+    echo "--------------------------------------------------"
+    echo "End Vt module"
+    echo "--------------------------------------------------"

@@ -186,30 +186,31 @@ proc CreateGfMatrix4d(): GfMatrix4d {. header: gfMatrix4dHeader,
                                        importcpp: "GfMatrix4d()" .}
 
 
-echo "Gf module"
-
-var 
-    s2 = CreateGfSize2()
-    s3 = CreateGfSize3()
-    v2i = CreateGfVec2i()
-    v2f = CreateGfVec2f()
-    v2d = CreateGfVec2d()
-    v2h = CreateGfVec2h()
-    v3i = CreateGfVec3i()
-    v3f = CreateGfVec3f()
-    v3d = CreateGfVec3d()
-    v3h = CreateGfVec3h()
-    v4i = CreateGfVec4i()
-    v4f = CreateGfVec4f()
-    v4d = CreateGfVec4d()
-    v4h = CreateGfVec4h()
-    l = CreateGfLine()
-    ls = CreateGfLineSeg()
-    l2 = CreateGfLine2d()
-    l2s = CreateGfLineSeg2d()
-    t = CreateGfTransform()
-    md = CreateGfMatrix4d()
-    mf = CreateGfMatrix4f()
-    r = CreateGfRay()
-
-echo "Created types (size, vecs, lines, transform, matrix, ray)"
+when isMainModule():
+    echo "Gf module"
+    
+    var 
+        s2 = CreateGfSize2()
+        s3 = CreateGfSize3()
+        v2i = CreateGfVec2i()
+        v2f = CreateGfVec2f()
+        v2d = CreateGfVec2d()
+        v2h = CreateGfVec2h()
+        v3i = CreateGfVec3i()
+        v3f = CreateGfVec3f()
+        v3d = CreateGfVec3d()
+        v3h = CreateGfVec3h()
+        v4i = CreateGfVec4i()
+        v4f = CreateGfVec4f()
+        v4d = CreateGfVec4d()
+        v4h = CreateGfVec4h()
+        l = CreateGfLine()
+        ls = CreateGfLineSeg()
+        l2 = CreateGfLine2d()
+        l2s = CreateGfLineSeg2d()
+        t = CreateGfTransform()
+        md = CreateGfMatrix4d()
+        mf = CreateGfMatrix4f()
+        r = CreateGfRay()
+    
+    echo "Created types (size, vecs, lines, transform, matrix, ray)"
