@@ -186,7 +186,7 @@ proc CreateGfMatrix4d(): GfMatrix4d {. header: gfMatrix4dHeader,
                                        importcpp: "GfMatrix4d()" .}
 
 
-when isMainModule():
+when isMainModule:
     echo "Gf module"
     
     var 

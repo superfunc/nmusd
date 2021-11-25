@@ -15,7 +15,7 @@ type
     
 proc CreateTfToken(): TfTokenObj {. header: tf, importcpp: "TfToken()" .}
 
-when isMainModule():
+when isMainModule:
     echo "Tf Module"
     
     echo "attempting to make a tf token"

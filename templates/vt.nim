@@ -75,7 +75,7 @@ proc get(v: VtValue): Option[cint] =
 proc set(v: var VtValue, k: cint): VtValue =
     v = priv_take(k)
 
-when isMainModule():
+when isMainModule:
     echo "Vt module"
     echo "--------------------------------------------------"
     
