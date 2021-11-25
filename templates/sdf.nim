@@ -80,6 +80,11 @@ type
     SdfValueTypeName {. header: sdfTypesHeader,
                         importcpp: "pxr::SdfValueTypeName".} = object
 
+# Many many sdfvaluetypenames types
+proc SdfValueTypeNameInt(): SdfValueTypeName {. header: sdfTypesHeader, importcpp: "(SdfValueTypeNames->Int)" .}
+proc SdfValueTypeNameFloat(): SdfValueTypeName {. header: sdfTypesHeader, importcpp: "(SdfValueTypeNames->Float)" .}
+proc SdfValueTypeNameHalf(): SdfValueTypeName {. header: sdfTypesHeader, importcpp: "(SdfValueTypeNames->Half)" .}
+proc SdfValueTypeNameDouble(): SdfValueTypeName {. header: sdfTypesHeader, importcpp: "(SdfValueTypeNames->Double)" .}
 
 proc empty(v: StdVec[SdfPrimSpecHandle]): bool {. importcpp: "#.empty()", header: "<vector>" .}
 
@@ -115,6 +120,10 @@ when isMainModule:
         proot = l.getPsuedoroot()
         name = $proot.getName()
         rootPrims = l.getRootPrims()
+        sdfInt = SdfValueTypeNameInt()
+        sdfDouble = SdfValueTypeNameDouble()
+        sdfHalf = SdfValueTypeNameHalf()
+        sdfFloat = SdfValueTypeNameFloat()
 
     while not rootPrims.empty():
         var r = rootPrims.next()

@@ -46,8 +46,12 @@ for f in ./templates/*.nim; do
     
     export _INCLUDES="${nm_usdlib_path}/include/"
     export _LIBDIR="${nm_usdlib_path}/lib/"
+    export _BINC=$"/opt/local/include"
+    export _BLIB=$"/opt/local/lib"
     nim cpp --cincludes:"$_INCLUDES" \
             --clibdir:"$_LIBDIR" \
+            --cincludes:"$_BINC" \
+            --clibdir:"$_BLIB" \
             --passL:-lusd_ms \
             --passL:-ltbb \
             -o:./bin/$binary_name \

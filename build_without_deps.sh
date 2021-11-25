@@ -28,6 +28,7 @@ if [ -z "${NMUSD_CUSTOM_USD_BUILD_PATH}" ]; then
               -DPXR_BUILD_TESTS=OFF           \
               -DPXR_SET_INTERNAL_NAMESPACE="_nmusd_v${mj}_${mn}_${pt}" \
               -DCMAKE_INSTALL_PREFIX="${build_dir}/inst" \
+              -DCMAKE_MACOSX_RPATH=OFF        \
               ..
         make -j8
         make install
